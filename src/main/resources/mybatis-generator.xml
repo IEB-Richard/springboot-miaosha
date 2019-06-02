@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<properties resource="generator.properties" />
+	<context id="MySQLTables" targetRuntime="MyBatis3">
+		<!-- 为模型生成序列化方法 -->
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+		<!-- 为生成的Java模型创建一个toString方法 -->
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+
+		<jdbcConnection driverClass="${jdbc.driverClass}"
+			connectionURL="${jdbc.connectionURL}" userId="${jdbc.userId}"
+			password="${jdbc.password}">
+			<!--解决mysql驱动升级到8.0后不生成指定数据库代码的问题 -->
+			<property name="nullCatalogMeansCurrent" value="true" />
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator
+			targetPackage="com.miaoshaproject.dataobject"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="mapping"
+			targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.miaoshaproject.dao" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table schema="miaosha" tableName="user_info"
+			domainObjectName="UserDO" 
+			enableCountByExample="false"
+			enableUpdateByExample="false" 
+			enableDeleteByExample="false"
+			enableSelectByExample="false" 
+			selectByExampleQueryId="false"></table>
+		<table schema="miaosha" tableName="user_password"
+			domainObjectName="UserPasswordDO"
+			enableCountByExample="false"
+			enableUpdateByExample="false" 
+			enableDeleteByExample="false"
+			enableSelectByExample="false" 
+			selectByExampleQueryId="false"></table>
+
+	</context>
+</generatorConfiguration>
